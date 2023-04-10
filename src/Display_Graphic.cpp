@@ -11,6 +11,13 @@ std::map<DisplayType_t, std::function<U8G2*(uint8_t, uint8_t, uint8_t, uint8_t)>
     { DisplayType_t::SH1106, [](uint8_t reset, uint8_t clock, uint8_t data, uint8_t cs) { return new U8G2_SH1106_128X64_NONAME_F_HW_I2C(U8G2_R0, reset, clock, data); } },
 };
 
+// Languages supported. Note: the order is important and must match locale_translations.h
+const uint8_t languages[] = {
+    DTU_LOCALE_EN, 
+    DTU_LOCALE_DE, 
+    DTU_LOCALE_FR
+};
+
 DisplayGraphicClass::DisplayGraphicClass()
 {
 }
@@ -102,7 +109,7 @@ void DisplayGraphicClass::setStartupDisplay()
     }
 
     _display->clearBuffer();
-    printText("OpenDTU!", 0);
+    printText(F_(dtu_opendtu), 0);
     _display->sendBuffer();
 }
 
@@ -141,10 +148,11 @@ void DisplayGraphicClass::loop()
         //=====> Actual Production ==========
         if ((totalPower > 0) && (isprod > 0)) {
             _display->setPowerSave(false);
+
             if (totalPower > 999) {
-                snprintf(_fmtText, sizeof(_fmtText), "%2.1f kW", (totalPower / 1000));
+                snprintf(_fmtText, sizeof(_fmtText), FLI_(dtu_actual_power_kw, _display_language), (totalPower / 1000));
             } else {
-                snprintf(_fmtText, sizeof(_fmtText), "%3.0f W", totalPower);
+                snprintf(_fmtText, sizeof(_fmtText), FLI_(dtu_actual_power_w, _display_language), totalPower);
             }
             printText(_fmtText, 0);
             _previousMillis = millis();
@@ -153,7 +161,7 @@ void DisplayGraphicClass::loop()
 
         //=====> Offline ===========
         else {
-            printText("offline", 0);
+            printText(FLI_(dtu_offline, _display_language), 0);
             // check if it's time to enter power saving mode
             if (millis() - _previousMillis >= (_interval * 2)) {
                 _display->setPowerSave(enablePowerSafe);
@@ -162,10 +170,10 @@ void DisplayGraphicClass::loop()
         //<=======================
 
         //=====> Today & Total Production =======
-        snprintf(_fmtText, sizeof(_fmtText), "today: %4.0f Wh", totalYieldDay);
+        snprintf(_fmtText, sizeof(_fmtText), FLI_(dtu_yield_today_wh, _display_language), totalYieldDay);
         printText(_fmtText, 1);
 
-        snprintf(_fmtText, sizeof(_fmtText), "total: %.1f kWh", totalYieldTotal);
+        snprintf(_fmtText, sizeof(_fmtText), FLI_(dtu_yield_total_kwh, _display_language), totalYieldTotal);
         printText(_fmtText, 2);
         //<=======================
 
@@ -195,7 +203,10 @@ void DisplayGraphicClass::setContrast(uint8_t contrast)
 
 void DisplayGraphicClass::setLanguage(uint8_t language)
 {
-    // TODO(fischaxe): replace method stub
+    if (_display_type == DisplayType_t::None) {
+        return;
+    }
+    _display_language = language < sizeof(languages) ? language : DISPLAY_LANGUAGE;
 }
 
 DisplayGraphicClass Display;
