@@ -20,6 +20,7 @@ public:
     void loop();
     void setContrast(uint8_t contrast);
     void setOrientation(uint8_t rotation = DISPLAY_ROTATION);
+    void setLanguage(uint8_t language = DISPLAY_LANGUAGE);
     void setStartupDisplay();
 
     bool enablePowerSafe = true;

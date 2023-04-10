@@ -111,6 +111,7 @@ void setup()
     Display.setOrientation(config.Display_Rotation);
     Display.enablePowerSafe = config.Display_PowerSafe;
     Display.enableScreensaver = config.Display_ScreenSaver;
+    Display.setLanguage(config.Display_Language);
     Display.setContrast(config.Display_Contrast);
     Display.setStartupDisplay();
     MessageOutput.println("done");

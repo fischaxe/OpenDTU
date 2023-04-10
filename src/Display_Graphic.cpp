@@ -193,4 +193,9 @@ void DisplayGraphicClass::setContrast(uint8_t contrast)
     _display->setContrast(contrast * 2.55f);
 }
 
+void DisplayGraphicClass::setLanguage(uint8_t language)
+{
+    // TODO(fischaxe): replace method stub
+}
+
 DisplayGraphicClass Display;
