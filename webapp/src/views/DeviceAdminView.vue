@@ -64,7 +64,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" v-model="deviceConfigList.display.language">
                                         <option v-for="language in displayLanguageList" :key="language.key" :value="language.key">
-                                            {{ language.value }}
+                                            {{ $t(`deviceadmin.` + language.value) }}
                                         </option>
                                     </select>
                                 </div>
@@ -77,7 +77,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" v-model="deviceConfigList.display.rotation">
                                         <option v-for="rotation in displayRotationList" :key="rotation.key" :value="rotation.key">
-                                            {{ rotation.value }}
+                                            {{ $t(`deviceadmin.` + rotation.value) }}
                                         </option>
                                     </select>
                                 </div>
@@ -132,15 +132,15 @@ export default defineComponent({
             alertType: "info",
             showAlert: false,
             displayLanguageList: [
-                { key: 0, value: this.$t('deviceadmin.en') },
-                { key: 1, value: this.$t('deviceadmin.de') },
-                { key: 2, value: this.$t('deviceadmin.fr') },
+                { key: 0, value: "en" },
+                { key: 1, value: "de" },
+                { key: 2, value: "fr" },
             ],
             displayRotationList: [
-                { key: 0, value: this.$t('deviceadmin.rot0') },
-                { key: 1, value: this.$t('deviceadmin.rot90') },
-                { key: 2, value: this.$t('deviceadmin.rot180') },
-                { key: 3, value: this.$t('deviceadmin.rot270') },
+                { key: 0, value: "rot0" },
+                { key: 1, value: "rot90" },
+                { key: 2, value: "rot180" },
+                { key: 3, value: "rot270" },
             ],
         }
     },
