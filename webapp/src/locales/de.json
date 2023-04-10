@@ -515,6 +515,10 @@
         "rot90": "90 Grad Drehung",
         "rot180": "180 Grad Drehung",
         "rot270": "270 Grad Drehung",
+        "DisplayLanguage": "Displaysprache",
+        "en": "Englisch",
+        "de": "Deutsch",
+        "fr": "Französisch",
         "Save": "@:dtuadmin.Save"
     },
     "pininfo": {

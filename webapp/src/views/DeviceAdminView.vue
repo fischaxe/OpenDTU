@@ -59,6 +59,19 @@
 
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">
+                                    {{ $t('deviceadmin.DisplayLanguage') }}
+                                </label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" v-model="deviceConfigList.display.language">
+                                        <option v-for="language in displayLanguageList" :key="language.key" :value="language.key">
+                                            {{ language.value }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">
                                     {{ $t('deviceadmin.Rotation') }}
                                 </label>
                                 <div class="col-sm-10">
@@ -118,6 +131,11 @@ export default defineComponent({
             alertMessage: "",
             alertType: "info",
             showAlert: false,
+            displayLanguageList: [
+                { key: 0, value: this.$t('deviceadmin.en') },
+                { key: 1, value: this.$t('deviceadmin.de') },
+                { key: 2, value: this.$t('deviceadmin.fr') },
+            ],
             displayRotationList: [
                 { key: 0, value: this.$t('deviceadmin.rot0') },
                 { key: 1, value: this.$t('deviceadmin.rot90') },
